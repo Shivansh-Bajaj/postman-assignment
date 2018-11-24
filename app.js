@@ -8,6 +8,7 @@ var logger = require('morgan');
 var authRouter = require('./routes/auth');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var tweetRouter = require('./routes/tweet');
 
 var app = express();
 
@@ -26,6 +27,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/api/v1/', indexRouter);
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/user', passport.authenticate('jwt', {session: false}), usersRouter);
+app.use('/api/v1/tweet', passport.authenticate('jwt', {session: false}), tweetRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

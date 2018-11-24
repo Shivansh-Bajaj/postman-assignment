@@ -1,3 +1,4 @@
+const config = require('../config/config.json');
 const express = require('express');
 const router  = express.Router();
 const jwt = require('jsonwebtoken');
@@ -51,8 +52,9 @@ router.post('/login', function (req, res, next) {
             res.status(403).json({"status": "fail", "error": err, 'msg': 'authentication fail'});
         }
         const token = jwt.sign({
+          _id: user._id,
           username: user.username
-        }, 'nvjdscijdijsiddwr44534534k3232');
+        }, config.jwtKey);
         return res.json({user, token});
       });
     })(req, res);
@@ -62,7 +64,6 @@ router.post('/login', function (req, res, next) {
       'err': e
     })
   }
-  
 });
 
 module.exports = router;

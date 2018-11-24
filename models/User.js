@@ -11,6 +11,9 @@ var newSchema = new Schema({
   
   'username': { type: String, trim: true, index: true, unique: true, sparse: true },
   'password': { type: String },
+  'follower': [{ type: Schema.Types.ObjectId, ref: 'User' }],
+  'following': [{ type: Schema.Types.ObjectId, ref: 'User' }],
+  'tweets': [{ type: Schema.Types.ObjectId, ref: 'Tweet' }],
   'createdAt': { type: Date, default: Date.now },
   'updatedAt': { type: Date, default: Date.now }
 });

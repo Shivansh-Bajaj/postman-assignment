@@ -8,8 +8,9 @@ if (mongoose.connection.readyState === 0) {
 var newSchema = new Schema({
   
   'title': { type: String },
-  'message': { type: String },
+  'body': { type: String },
   'by': { type: Schema.Types.ObjectId, ref: 'User' },
+  'likes': { type: Number, default: 0 },
   'createdAt': { type: Date, default: Date.now },
   'updatedAt': { type: Date, default: Date.now }
 });
