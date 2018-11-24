@@ -6,7 +6,7 @@
 
 var url = require('url')
 
-var uri = '';
+var uri = 'mongodb://james:james123@ds143141.mlab.com:43141/testapplication610';
 if (!uri) {
   throw new Error(
     '\033[31mYou need to provide the connection string. ' +
