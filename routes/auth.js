@@ -55,7 +55,11 @@ router.post('/login', function (req, res, next) {
           _id: user._id,
           username: user.username
         }, config.jwtKey);
-        return res.json({user, token});
+        return res.json({
+          status: 'success',
+          user: user,
+          token: token
+        });
       });
     })(req, res);
   } catch (e){

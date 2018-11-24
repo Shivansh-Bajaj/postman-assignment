@@ -6,7 +6,10 @@ const db = require('../models/all-models');
 /* GET home page. */
 router.get('/', async function(req, res) {
   try {
-    let tweets = await db.Tweet.find({'by': { '$in': req.user.tweets}});
+    let tweetsIds = req.user.tweets.map(tweet => {
+      return tweet.toString();
+    });
+    let tweets = await db.Tweet.find({'_id': { '$in': tweetsIds}});
     return res.status(200).send({
       'status': 'success',
       'data': tweets 
@@ -25,7 +28,7 @@ router.get('/all', async function(req, res) {
     let users = req.user.following.map((obj) => {
       return obj.toString();
     });
-    user.push(req.user._id);
+    users.push(req.user._id.toString());
     let tweets = await db.Tweet.find({'by': { '$in': users}});
     return res.status(200).send({
       'status': 'success',
