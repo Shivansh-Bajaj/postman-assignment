@@ -14,7 +14,7 @@ router.get('/', async function(req, res) {
       'status': 'success',
       'data': tweets 
     });
-  } catch {e} {
+  } catch (e) {
     return res.status(500).json({
       'status': 'fail',
       'err': JSON.stringify(e),
@@ -71,7 +71,7 @@ router.post('/', async function(req, res) {
 router.delete('/', async function(req, res) {
   try {
     if (req.body.hasOwnProperty('id')) {
-      let tweet = await db.Tweet.findOneAndDelete({"_id": req.body.id, "by": req.user._id});
+      let tweet = await db.Tweet.findOneAndDelete({'_id': req.body.id, 'by': req.user._id});
       if (tweet) {
         req.user.tweets.remove(req.body.id);
         await req.user.save();  
